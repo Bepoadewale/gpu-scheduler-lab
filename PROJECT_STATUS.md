@@ -22,7 +22,7 @@ FOUNDATION
 
 ## Known Failures
 
-- Remote fetch blocked by DNS on 2026-09-19.
+- GitHub CI rerun pending after changing the initialization workflow to install test tooling without packaging metadata directories.
 
 ## Current P0 Objective
 
