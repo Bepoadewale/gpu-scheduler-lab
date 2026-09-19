@@ -1,0 +1,6 @@
+# Current Kueue APIs must be verified against the installed release before applying.
+# This configuration documents the intended admission layer; simulator experiments are executable now.
+apiVersion: kueue.x-k8s.io/v1beta1
+kind: LocalQueue
+metadata: {name: research, namespace: team-research}
+spec: {clusterQueue: shared-gpu}
