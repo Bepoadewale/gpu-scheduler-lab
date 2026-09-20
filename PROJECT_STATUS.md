@@ -4,6 +4,10 @@
 
 FOUNDATION
 
+## Maturity Model
+
+`FOUNDATION` → `PARTIALLY VALIDATED` → `LOCAL END-TO-END VALIDATED` → `PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE`.
+
 ## Executed and Verified
 
 - Offline quota/borrowing/fair-share/gang/fragmentation simulator tests.
@@ -27,6 +31,15 @@ FOUNDATION
 ## Current P0 Objective
 
 Install current Kueue in kind and prove one LocalQueue/ClusterQueue admission experiment.
+
+## Completion Blockers
+
+- No kind/Kueue/Volcano runtime or actual Workload admission experiment has executed.
+- Quota, borrowing, fair-share, priority/preemption, starvation, gang, and scheduler evidence are simulated only.
+
+## Explicitly Unexecuted Production Adapters
+
+- Physical GPU fleet, MIG, NVLink, RDMA, real accelerator performance, and production scheduler benchmarks.
 
 ## Last Validation
 
