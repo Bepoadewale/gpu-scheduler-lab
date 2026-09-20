@@ -18,3 +18,11 @@
 - **PARTIALLY VALIDATED:** at least one real scheduler integration runs, but experiment set is incomplete.
 - **LOCAL END-TO-END VALIDATED:** primary scheduling story runs with material experiment/recovery evidence remaining.
 - **PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE:** every gate is executed locally; no real-GPU implication is made.
+
+# Clean-Room Reproducibility Gate
+
+`PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE` requires two executed clean-room cycles: clone → install → bootstrap kind, simulated GPU resources, Kueue, retained Volcano → smoke → quota/fair-share/preemption demo → gang or starvation scenario → validation → project-scoped cleanup → second clean bootstrap/demo. Planned commands: `make install`, `make bootstrap-local`, `make smoke`, `make demo-kueue`, `make demo-gang`, `make verify`, `make clean-local`.
+
+- [ ] Clean clone/bootstrap has no hidden state; primary and failure demos pass.
+- [ ] Cleanup removes only this project and unrelated resources survive.
+- [ ] Post-cleanup absence and second bootstrap/demo are recorded in `docs/VALIDATION.md`.
