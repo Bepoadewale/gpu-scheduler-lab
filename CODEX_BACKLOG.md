@@ -28,3 +28,6 @@ P0 blocks PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE; do not select P1/P2 work fir
 # P3 — Future / Cloud / Hardware
 
 - Real GPU fleet, MIG, NVLink, RDMA and production scheduler benchmarks.
+# Clean-Room Completion Blocker
+
+- [ ] Pass the full clean-room reproducibility gate: deterministic bootstrap, smoke, Kueue and gang-scheduling demos, safe cleanup, a second clean bootstrap, and recorded evidence. Break this into focused P0 work only during the scheduled week.
