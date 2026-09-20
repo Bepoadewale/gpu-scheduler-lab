@@ -1,4 +1,15 @@
+# Completion Target
+
+PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE
+
+# Current Completion Blockers
+
+- Run Kueue queue/admission experiments in kind with explicitly simulated extended GPU resources.
+- Execute borrowing/fair-share, priority/preemption/starvation, and Volcano gang scheduling evidence.
+
 # P0 — Required for Portfolio Claim
+
+P0 blocks PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE; do not select P1/P2 work first.
 
 - Verify current Kueue compatibility and bootstrap kind.
 - Create ResourceFlavor, ClusterQueue, LocalQueue and simulated GPU resource admission test.

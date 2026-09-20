@@ -7,3 +7,5 @@ Stack: Python 3.12 simulator, kind, Kueue/Volcano and Kubernetes manifests.
 Commands: `make test`, `make lint`, `make demo-borrow`; future commands must validate current Kueue/Volcano versions before use.
 
 Rules: simulated extended resources are not GPUs; keep the simulator as a what-if tool, verify scheduler behavior with integration tests, no secrets/main pushes, and update status/backlog honestly.
+
+Completion rule: do not mark **PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE** unless the gate in `DEFINITION_OF_DONE.md` has executed evidence. Simulator output, manifests, and unit tests do not establish real scheduler behavior. Kueue/Volcano experiments must run on local Kubernetes with simulated resources explicitly labeled; real GPU hardware remains a separate boundary.
