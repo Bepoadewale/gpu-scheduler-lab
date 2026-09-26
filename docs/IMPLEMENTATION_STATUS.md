@@ -10,10 +10,11 @@
 | Priority reclaim / preemption | ✅ EXECUTED LOCALLY | `make demo-preemption` Kueue `Preempted` condition |
 | Starvation avoidance | ✅ EXECUTED LOCALLY | `make demo-starvation` BestEffortFIFO state |
 | Volcano v1.12.0 PodGroup gang scheduling | ✅ EXECUTED LOCALLY | `make demo-gang` |
+| CI kind integration | ✅ EXECUTED LOCALLY | GitHub Actions run `36223123276` |
 | GPU resource capacity | 🔵 SIMULATED | Kueue-only `example.com/simulated-gpu` quota; no node GPU |
 | Topology / fragmentation scheduler placement | 📐 ARCHITECTURE / CONTRACT ONLY | offline simulator only; not claimed as scheduler evidence |
 | Hardware performance | 📋 ROADMAP | requires real fleet |
 
 ## Clean-room evidence boundary
 
-Clean-room reproducibility is ✅ EXECUTED LOCALLY: two project-scoped bootstrap → smoke → primary/failure demo → validation → cleanup cycles passed and are recorded in `docs/VALIDATION.md`. GitHub Actions confirmation remains pending before merge.
+Clean-room reproducibility is ✅ EXECUTED LOCALLY: two project-scoped bootstrap → smoke → primary/failure demo → validation → cleanup cycles passed and are recorded in `docs/VALIDATION.md`. GitHub Actions run `36223123276` independently executed the same bootstrap/demo/cleanup workflow.

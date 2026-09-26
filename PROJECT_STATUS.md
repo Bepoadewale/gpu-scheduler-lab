@@ -2,7 +2,7 @@
 
 ## Current Maturity
 
-LOCAL END-TO-END VALIDATED
+PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE
 
 ## Maturity Model
 
@@ -31,15 +31,15 @@ LOCAL END-TO-END VALIDATED
 
 ## Known Failures
 
-- None known locally. GitHub Actions evidence is pending the Week 8 PR run.
+- None known.
 
 ## Current P0 Objective
 
-Obtain a green Week 8 `kind-integration` CI run and prepare the review-ready PR.
+No unfinished P0 completion blocker. Next work is P1 scheduler metrics/reporting or explicitly unexecuted real-hardware validation.
 
 ## Completion Blockers
 
-- Required GitHub Actions checks have not yet run for the Week 8 branch.
+- None. The local-first completion gate is satisfied.
 
 ## Explicitly Unexecuted Production Adapters
 
@@ -52,10 +52,11 @@ Obtain a green Week 8 `kind-integration` CI run and prepare the review-ready PR.
 - `make demo-preemption`: passed (Kueue recorded `Preempted` cohort reclaim).
 - `make demo-starvation`: passed (fitting later workload admitted while impossible earlier workload stayed pending).
 - `make demo-gang`: passed (Volcano scheduled feasible gang and kept infeasible gang pending).
+- GitHub Actions run `36223123276`: `validate` passed and `kind-integration` passed. The integration job executed bootstrap, smoke, all five real scheduler demos, verification, and project-scoped cleanup.
 
 ## Last Updated
 
-2026-09-26, Week 8 working branch (uncommitted at this point).
+2026-09-26, Week 8 PR #4, commit `5a2a449` plus final evidence update pending commit.
 
 ## Clean-Room Reproducibility
 

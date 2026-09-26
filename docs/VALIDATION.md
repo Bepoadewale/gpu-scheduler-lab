@@ -50,6 +50,9 @@ docker ps --format '{{.Names}}'  # no gpu-scheduler-lab-* containers
 
 The bootstrap preloads the pinned controller images into only the project kind nodes. This avoids a Docker Desktop multi-platform image-import issue while preserving normal first-run `docker pull` behaviour. It does not depend on a pre-existing cluster, database, Kubernetes CRD, or manually created queue.
 
-## CI boundary
+## CI validation
 
-The Week 8 PR adds a `kind-integration` GitHub Actions job that repeats bootstrap, smoke, all scheduler demos, verification, and always-on project-scoped cleanup. Its first green run must be recorded in `PROJECT_STATUS.md` before final merge.
+GitHub Actions run [`36223123276`](https://github.com/Bepoadewale/gpu-scheduler-lab/actions/runs/36223123276) passed on 2026-09-26:
+
+- `validate` passed Ruff and pytest.
+- `kind-integration` passed `make install`, `make bootstrap-local`, `make smoke`, all five real scheduler demos, `make verify`, and always-on `make clean-local`.

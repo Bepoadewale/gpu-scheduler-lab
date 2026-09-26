@@ -4,15 +4,13 @@ PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE
 
 # Current Completion Blockers
 
-- Pass the full two-cycle clean-room reproducibility gate and record the exact evidence.
-- Obtain a green `kind-integration` GitHub Actions result for the pinned local stack.
+None. The local-first portfolio completion gate is satisfied.
 
 # P0 — Required for Portfolio Claim
 
 P0 blocks PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE; do not select P1/P2 work first.
 
-- Execute and record two clean-room cycles using `make cleanroom-validate`.
-- Fix any Week 8 `kind-integration` CI failure without weakening validation.
+None. Select P1 only after preserving the executed local-first evidence boundary.
 
 # P1 — Production Hardening
 
