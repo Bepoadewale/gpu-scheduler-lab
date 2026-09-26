@@ -52,7 +52,7 @@ The bootstrap preloads the pinned controller images into only the project kind n
 
 ## CI validation
 
-GitHub Actions run [`36223123276`](https://github.com/Bepoadewale/gpu-scheduler-lab/actions/runs/36223123276) passed on 2026-09-26:
+GitHub Actions runs [`36223123276`](https://github.com/Bepoadewale/gpu-scheduler-lab/actions/runs/36223123276) and [`36228218616`](https://github.com/Bepoadewale/gpu-scheduler-lab/actions/runs/36228218616) passed on 2026-09-26. The latter verifies the Kueue-webhook readiness retry used before applying Volcano.
 
 - `validate` passed Ruff and pytest.
 - `kind-integration` passed `make install`, `make bootstrap-local`, `make smoke`, all five real scheduler demos, `make verify`, and always-on `make clean-local`.

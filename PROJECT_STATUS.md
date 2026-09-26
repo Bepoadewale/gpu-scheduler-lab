@@ -52,11 +52,11 @@ No unfinished P0 completion blocker. Next work is P1 scheduler metrics/reporting
 - `make demo-preemption`: passed (Kueue recorded `Preempted` cohort reclaim).
 - `make demo-starvation`: passed (fitting later workload admitted while impossible earlier workload stayed pending).
 - `make demo-gang`: passed (Volcano scheduled feasible gang and kept infeasible gang pending).
-- GitHub Actions run `36223123276`: `validate` passed and `kind-integration` passed. The integration job executed bootstrap, smoke, all five real scheduler demos, verification, and project-scoped cleanup.
+- GitHub Actions runs `36223123276` and `36228218616`: `validate` and `kind-integration` passed. The integration job executed bootstrap, smoke, all five real scheduler demos, verification, and project-scoped cleanup; the latter run also covered the Kueue-webhook readiness retry.
 
 ## Last Updated
 
-2026-09-26, Week 8 PR #4, commit `5a2a449` plus final evidence update pending commit.
+2026-09-26, Week 8 PR #4, latest validated implementation commit `4331bd6`.
 
 ## Clean-Room Reproducibility
 

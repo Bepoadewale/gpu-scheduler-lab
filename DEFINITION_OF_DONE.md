@@ -9,7 +9,7 @@
 - [x] Topology/fragmentation is explicitly limited to the simulator; no scheduler-visible topology placement is claimed.
 - [x] Simulator remains a what-if/capacity companion and is not used as proof of Kubernetes scheduler behavior.
 - [x] Scheduler/admission command reports capture Kubernetes object state and preemption condition evidence.
-- [x] Reproducible demo, unit/integration/E2E/failure tests, teardown, and CI are green (`validate` and `kind-integration` passed in GitHub Actions run `36223123276`).
+- [x] Reproducible demo, unit/integration/E2E/failure tests, teardown, and CI are green (`validate` and `kind-integration` passed in GitHub Actions runs `36223123276` and `36228218616`).
 - [x] README/status clearly separate simulated resources from real GPU hardware and performance.
 
 ## Maturity Levels
