@@ -21,6 +21,18 @@ wait_for() {
   done
 }
 
+retry() {
+  local description="$1"; shift
+  local attempts=0
+  until "$@"; do
+    attempts=$((attempts + 1))
+    if [ "$attempts" -ge 8 ]; then
+      fail "failed after retries: ${description}"
+    fi
+    sleep 2
+  done
+}
+
 kubectl_lab() { kubectl --context "kind-${CLUSTER_NAME}" "$@"; }
 
 load_kind_image() {

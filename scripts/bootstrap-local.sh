@@ -2,6 +2,10 @@
 set -euo pipefail
 source "$(dirname "$0")/lib.sh"
 
+kueue_webhook_has_endpoint() {
+  test -n "$(kubectl_lab -n kueue-system get endpoints kueue-webhook-service -o jsonpath='{.subsets[0].addresses[0].ip}')"
+}
+
 need docker; need kind; need kubectl; need curl
 docker info >/dev/null || fail "Docker Desktop is not ready"
 
@@ -25,9 +29,11 @@ kubectl_lab -n kueue-system rollout status deployment/kueue-controller-manager -
 kubectl_lab apply -f "$ROOT_DIR/platform/kueue/manager-config.yaml"
 kubectl_lab -n kueue-system rollout restart deployment/kueue-controller-manager
 kubectl_lab -n kueue-system rollout status deployment/kueue-controller-manager --timeout=180s
+kubectl_lab -n kueue-system wait --for=condition=Ready pod -l control-plane=controller-manager --timeout=120s
+wait_for "Kueue webhook endpoint" kueue_webhook_has_endpoint
 
 log "Installing Volcano ${VOLCANO_VERSION}"
-kubectl_lab apply -f "https://raw.githubusercontent.com/volcano-sh/volcano/${VOLCANO_VERSION}/installer/volcano-development.yaml"
+retry "Volcano manifest application after Kueue webhook readiness" kubectl_lab apply -f "https://raw.githubusercontent.com/volcano-sh/volcano/${VOLCANO_VERSION}/installer/volcano-development.yaml"
 wait_for "Volcano scheduler deployment" kubectl_lab -n volcano-system get deployment volcano-scheduler
 kubectl_lab -n volcano-system rollout status deployment/volcano-scheduler --timeout=180s
 
