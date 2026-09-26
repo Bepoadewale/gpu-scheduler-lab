@@ -1,5 +1,5 @@
 # Roadmap and honesty
 
-Implemented: deterministic policy simulator with nominal quota borrowing, flavor capacity, gang all-or-none admission check, fragmentation analysis and fairness calculation tests.
+Executed: deterministic policy simulator; disposable kind; Kueue `v0.19.6` ResourceFlavor/ClusterQueue/LocalQueue/Workload experiments; quota exhaustion and borrowing; fair-share weighted status; cohort reclaim preemption; starvation avoidance; and Volcano `v1.12.0` PodGroup gang success/failure.
 
-Not yet executed: kind fake extended resources, Kueue admission behavior, cohorts/fair-sharing/preemption, Volcano PodGroups, topology-aware placement, Prometheus/Grafana, reports and real GPU integration. The `v1beta1` manifest is a placeholder pending current Kueue release verification.
+Not claimed as executed: physical GPUs, node-level extended-resource advertisement, GPU topology-aware placement, Prometheus/Grafana, real accelerator metrics, MIG/NVLink/RDMA, or production scheduler benchmarks. The simulator remains a companion for topology/fragmentation what-if analysis.

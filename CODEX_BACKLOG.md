@@ -4,26 +4,24 @@ PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE
 
 # Current Completion Blockers
 
-- Run Kueue queue/admission experiments in kind with explicitly simulated extended GPU resources.
-- Execute borrowing/fair-share, priority/preemption/starvation, and Volcano gang scheduling evidence.
+- Pass the full two-cycle clean-room reproducibility gate and record the exact evidence.
+- Obtain a green `kind-integration` GitHub Actions result for the pinned local stack.
 
 # P0 — Required for Portfolio Claim
 
 P0 blocks PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE; do not select P1/P2 work first.
 
-- Verify current Kueue compatibility and bootstrap kind.
-- Create ResourceFlavor, ClusterQueue, LocalQueue and simulated GPU resource admission test.
-- Add cohort borrowing/fair-share experiment with observed Kubernetes states.
-- Add preemption experiment and validate expected statuses.
-- Add Volcano gang experiment; retain simulator as companion.
+- Execute and record two clean-room cycles using `make cleanroom-validate`.
+- Fix any Week 8 `kind-integration` CI failure without weakening validation.
 
 # P1 — Production Hardening
 
-- Repeatable teardown, metrics and topology/fragmentation test harness.
+- Add richer scheduler metric scraping/report artefacts beyond the command-level Kubernetes evidence.
+- Explore scheduler-visible topology-aware placement only with a clear local capability and test design.
 
 # P2 — Enhancements
 
-- Comparative experiment reports.
+- Comparative experiment reports and additional queueing-policy scenarios.
 
 # P3 — Future / Cloud / Hardware
 
