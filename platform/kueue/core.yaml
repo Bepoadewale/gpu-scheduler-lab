@@ -1,0 +1,80 @@
+# The resource below is a Kueue quota accounting unit only. It is deliberately
+# not advertised by a physical node: `example.com/simulated-gpu` represents
+# simulated accelerator capacity and establishes no CUDA/hardware claim.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: team-research
+  labels:
+    kueue.x-k8s.io/managed: "true"
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: team-inference
+  labels:
+    kueue.x-k8s.io/managed: "true"
+---
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: ResourceFlavor
+metadata:
+  name: simulated-accelerator
+spec: {}
+---
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: ClusterQueue
+metadata:
+  name: research-cq
+spec:
+  cohortName: shared-simulated-accelerators
+  fairSharing:
+    weight: "1"
+  namespaceSelector: {}
+  resourceGroups:
+    - coveredResources: ["example.com/simulated-gpu"]
+      flavors:
+        - name: simulated-accelerator
+          resources:
+            - name: example.com/simulated-gpu
+              nominalQuota: 2
+              borrowingLimit: 2
+              lendingLimit: 2
+  preemption:
+    reclaimWithinCohort: Any
+---
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: ClusterQueue
+metadata:
+  name: inference-cq
+spec:
+  cohortName: shared-simulated-accelerators
+  fairSharing:
+    weight: "2"
+  namespaceSelector: {}
+  resourceGroups:
+    - coveredResources: ["example.com/simulated-gpu"]
+      flavors:
+        - name: simulated-accelerator
+          resources:
+            - name: example.com/simulated-gpu
+              nominalQuota: 2
+              borrowingLimit: 2
+              lendingLimit: 2
+  preemption:
+    reclaimWithinCohort: Any
+---
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: LocalQueue
+metadata:
+  name: research
+  namespace: team-research
+spec:
+  clusterQueue: research-cq
+---
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: LocalQueue
+metadata:
+  name: inference
+  namespace: team-inference
+spec:
+  clusterQueue: inference-cq

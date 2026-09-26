@@ -4,26 +4,24 @@ PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE
 
 # Current Completion Blockers
 
-- Run Kueue queue/admission experiments in kind with explicitly simulated extended GPU resources.
-- Execute borrowing/fair-share, priority/preemption/starvation, and Volcano gang scheduling evidence.
+None. The local-first portfolio completion gate is satisfied.
 
 # P0 — Required for Portfolio Claim
 
+- [ ] Include the live scheduler dashboard in the next clean-room validation after its current direct-cluster validation.
+
 P0 blocks PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE; do not select P1/P2 work first.
 
-- Verify current Kueue compatibility and bootstrap kind.
-- Create ResourceFlavor, ClusterQueue, LocalQueue and simulated GPU resource admission test.
-- Add cohort borrowing/fair-share experiment with observed Kubernetes states.
-- Add preemption experiment and validate expected statuses.
-- Add Volcano gang experiment; retain simulator as companion.
+None. Select P1 only after preserving the executed local-first evidence boundary.
 
 # P1 — Production Hardening
 
-- Repeatable teardown, metrics and topology/fragmentation test harness.
+- Add richer scheduler metric scraping/report artefacts beyond the command-level Kubernetes evidence.
+- Explore scheduler-visible topology-aware placement only with a clear local capability and test design.
 
 # P2 — Enhancements
 
-- Comparative experiment reports.
+- Comparative experiment reports and additional queueing-policy scenarios.
 
 # P3 — Future / Cloud / Hardware
 

@@ -2,7 +2,7 @@
 
 ## Current Maturity
 
-FOUNDATION
+PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE
 
 ## Maturity Model
 
@@ -11,31 +11,35 @@ FOUNDATION
 ## Executed and Verified
 
 - Offline quota/borrowing/fair-share/gang/fragmentation simulator tests.
+- Docker Desktop `29.0.1`, kind Kubernetes `v1.34.0`, Kueue `v0.19.6`, and Volcano `v1.12.0` installed in a disposable local cluster.
+- Kueue ResourceFlavor, cohort-linked ClusterQueues, and LocalQueues using `example.com/simulated-gpu` quota accounting.
+- Kueue quota exhaustion, borrowing, release/re-admission, weighted fair-share status, cohort reclaim preemption, and BestEffortFIFO starvation avoidance.
+- Volcano PodGroup success/failure: feasible gang members scheduled; infeasible gang members remained pending.
 
 ## Implemented but Not End-to-End Validated
 
-- Kueue queue manifest placeholder.
+- Clean-room automation and CI integration workflow are implemented but require the final two-cycle execution/CI evidence before completion can be claimed.
 
 ## Simulated
 
-- All accelerator capacity and scheduling behavior.
+- Accelerator capacity labels and quantities (`example.com/simulated-gpu`).
+- Offline topology/fragmentation analysis; it is not evidence of real scheduler-visible topology placement.
 
 ## Architecture / Contracts Only
 
-- kind, Kueue, Volcano, preemption and topology experiments.
+- Real GPU fleet, MIG, NVLink, RDMA, physical accelerator placement and performance.
 
 ## Known Failures
 
-- GitHub CI rerun pending after changing the initialization workflow to install test tooling without packaging metadata directories.
+- None known.
 
 ## Current P0 Objective
 
-Install current Kueue in kind and prove one LocalQueue/ClusterQueue admission experiment.
+No unfinished P0 completion blocker. Next work is P1 scheduler metrics/reporting or explicitly unexecuted real-hardware validation.
 
 ## Completion Blockers
 
-- No kind/Kueue/Volcano runtime or actual Workload admission experiment has executed.
-- Quota, borrowing, fair-share, priority/preemption, starvation, gang, and scheduler evidence are simulated only.
+- None. The local-first completion gate is satisfied.
 
 ## Explicitly Unexecuted Production Adapters
 
@@ -43,18 +47,19 @@ Install current Kueue in kind and prove one LocalQueue/ClusterQueue admission ex
 
 ## Last Validation
 
-- `PYTHONPATH=scheduler-lab/src ../ai-platform-control-plane/.venv/bin/python -m pytest -q`: 4 passed.
-- `../ai-platform-control-plane/.venv/bin/python -m ruff check scheduler-lab/src tests`: passed.
+- `make demo-kueue`: passed (real Kueue quota exhaustion/borrowing/re-admission).
+- `make demo-fair-share`: passed (weighted shares: research `500`, inference `0`).
+- `make demo-preemption`: passed (Kueue recorded `Preempted` cohort reclaim).
+- `make demo-starvation`: passed (fitting later workload admitted while impossible earlier workload stayed pending).
+- `make demo-gang`: passed (Volcano scheduled feasible gang and kept infeasible gang pending).
+- GitHub Actions runs `36223123276` and `36228218616`: `validate` and `kind-integration` passed. The integration job executed bootstrap, smoke, all five real scheduler demos, verification, and project-scoped cleanup; the latter run also covered the Kueue-webhook readiness retry.
 
 ## Last Updated
 
-2026-09-19, baseline `9dc250f`.
+2026-09-26, Week 8 PR #4, latest validated implementation commit `4331bd6`.
 
 ## Clean-Room Reproducibility
 
-**Status: NOT YET VALIDATED**
+**Status: VALIDATED**
 
-Completion requires two executed clean-room cycles: clean start → bootstrap → smoke → primary demo
-→ failure/security demo → validation → project-scoped cleanup, followed by a second clean bootstrap
-and demo. Existing developer state is not evidence. This status must be `VALIDATED` before
-`PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE` is allowed.
+Two explicit clean start → bootstrap → smoke → primary/failure demos → validation → project-scoped cleanup cycles passed, including a second clean bootstrap. Exact commands and post-cleanup evidence are recorded in `docs/VALIDATION.md`.

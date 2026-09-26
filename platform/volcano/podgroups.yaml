@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: volcano-lab
+---
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: PodGroup
+metadata:
+  name: successful-gang
+  namespace: volcano-lab
+spec:
+  minMember: 2
+  minResources:
+    cpu: "100m"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: successful-gang-a
+  namespace: volcano-lab
+  annotations:
+    scheduling.volcano.sh/group-name: successful-gang
+spec:
+  schedulerName: volcano
+  restartPolicy: Never
+  containers:
+    - name: work
+      image: registry.k8s.io/pause:3.10
+      resources:
+        requests:
+          cpu: "50m"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: successful-gang-b
+  namespace: volcano-lab
+  annotations:
+    scheduling.volcano.sh/group-name: successful-gang
+spec:
+  schedulerName: volcano
+  restartPolicy: Never
+  containers:
+    - name: work
+      image: registry.k8s.io/pause:3.10
+      resources:
+        requests:
+          cpu: "50m"
+---
+apiVersion: scheduling.volcano.sh/v1beta1
+kind: PodGroup
+metadata:
+  name: blocked-gang
+  namespace: volcano-lab
+spec:
+  minMember: 2
+  minResources:
+    cpu: "1000"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: blocked-gang-a
+  namespace: volcano-lab
+  annotations:
+    scheduling.volcano.sh/group-name: blocked-gang
+spec:
+  schedulerName: volcano
+  restartPolicy: Never
+  containers:
+    - name: work
+      image: registry.k8s.io/pause:3.10
+      resources:
+        requests:
+          cpu: "500"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: blocked-gang-b
+  namespace: volcano-lab
+  annotations:
+    scheduling.volcano.sh/group-name: blocked-gang
+spec:
+  schedulerName: volcano
+  restartPolicy: Never
+  containers:
+    - name: work
+      image: registry.k8s.io/pause:3.10
+      resources:
+        requests:
+          cpu: "500"

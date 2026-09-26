@@ -3,10 +3,19 @@
 | Capability | Status | Validation |
 | --- | --- | --- |
 | Scheduling what-if logic | ✅ EXECUTED LOCALLY | simulator pytest |
-| GPU resource capacity | 🔵 SIMULATED | local model only |
-| Kueue/Volcano behavior | 📐 Architecture Only | manifests/roadmap |
-| Hardware performance | 📋 Planned | requires real fleet |
+| kind Kubernetes | ✅ EXECUTED LOCALLY | project-scoped `gpu-scheduler-lab` cluster |
+| Kueue v0.19.6 admission | ✅ EXECUTED LOCALLY | ResourceFlavor, ClusterQueues, LocalQueues and Workloads |
+| Quota / borrowing / exhaustion | ✅ EXECUTED LOCALLY | `make demo-kueue` |
+| Fair sharing | ✅ EXECUTED LOCALLY | `make demo-fair-share` weighted-share state |
+| Priority reclaim / preemption | ✅ EXECUTED LOCALLY | `make demo-preemption` Kueue `Preempted` condition |
+| Starvation avoidance | ✅ EXECUTED LOCALLY | `make demo-starvation` BestEffortFIFO state |
+| Volcano v1.12.0 PodGroup gang scheduling | ✅ EXECUTED LOCALLY | `make demo-gang` |
+| Live scheduler dashboard | ✅ EXECUTED LOCALLY | Read-only local page refreshed from project kind/Kueue/Volcano API state during the 2026-09-26 dashboard validation |
+| CI kind integration | ✅ EXECUTED LOCALLY | GitHub Actions runs `36223123276` and `36228218616` |
+| GPU resource capacity | 🔵 SIMULATED | Kueue-only `example.com/simulated-gpu` quota; no node GPU |
+| Topology / fragmentation scheduler placement | 📐 ARCHITECTURE / CONTRACT ONLY | offline simulator only; not claimed as scheduler evidence |
+| Hardware performance | 📋 ROADMAP | requires real fleet |
 
 ## Clean-room evidence boundary
 
-Clean-room reproducibility is 📋 ROADMAP until two clean bootstrap → smoke → primary demo → failure/security demo → validation → safe project-scoped cleanup cycles have been executed and recorded in `docs/VALIDATION.md`.
+Clean-room reproducibility is ✅ EXECUTED LOCALLY: two project-scoped bootstrap → smoke → primary/failure demo → validation → cleanup cycles passed and are recorded in `docs/VALIDATION.md`. GitHub Actions runs `36223123276` and `36228218616` independently executed the same bootstrap/demo/cleanup workflow.
