@@ -74,6 +74,11 @@ calculate or display physical GPU telemetry. Its command is now part of the
 next clean-room validation script, but that full repeat has not yet been
 recorded for this dashboard addition.
 
+The dashboard deliberately derives the gang outcome from member Pod phases
+(`Running / minimum`) and shows the native Volcano PodGroup phase separately.
+This prevents an implementation-specific PodGroup status field from obscuring
+the observed fact that both members of the feasible gang are running.
+
 ## CI validation
 
 GitHub Actions runs [`36223123276`](https://github.com/Bepoadewale/gpu-scheduler-lab/actions/runs/36223123276) and [`36228218616`](https://github.com/Bepoadewale/gpu-scheduler-lab/actions/runs/36228218616) passed on 2026-09-26. The latter verifies the Kueue-webhook readiness retry used before applying Volcano.

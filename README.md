@@ -80,4 +80,7 @@ After `make bootstrap-local`, run `make dashboard` and open
 project-scoped kind cluster every five seconds and shows real Kueue queues and
 workloads plus Volcano PodGroups and gang-member Pod phases. Run `make demo-kueue`
 or `make demo-gang` before taking a screenshot. It is intentionally read-only;
-the prominent simulated-hardware boundary remains visible in the UI.
+the prominent simulated-hardware boundary remains visible in the UI. Gang
+success is derived from the actual member Pods (`Running / minimum`), while the
+native Volcano PodGroup phase is shown separately for transparent controller
+state.

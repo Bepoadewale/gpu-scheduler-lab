@@ -16,7 +16,8 @@ def test_collect_snapshot_uses_real_resource_shapes() -> None:
 
     snapshot = collect_snapshot(run)
     assert snapshot["cluster_queues"] == [{"name": "research-cq", "cohort": "shared", "active": "True", "pending": 2, "admitted": 1}]
-    assert snapshot["pod_groups"][0]["running"] == 2
+    assert snapshot["pod_groups"][0]["observed_running"] == 1
+    assert snapshot["pod_groups"][0]["outcome"] == "PENDING"
     assert snapshot["gang_pods"][0]["phase"] == "Running"
 
 
@@ -24,3 +25,4 @@ def test_dashboard_marks_simulated_hardware_and_real_state() -> None:
     page = render_dashboard({"generated_at": "2026-09-26T00:00:00+00:00", "nodes": [], "cluster_queues": [], "local_queues": [], "workloads": [], "pod_groups": [], "gang_pods": []})
     assert "SIMULATED HARDWARE" in page
     assert "real kind, Kueue and Volcano state" in page
+    assert "Outcome (derived from Pods)" in page

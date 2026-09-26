@@ -49,6 +49,36 @@ def collect_snapshot(run: KubectlRunner = kubectl_json) -> dict[str, Any]:
     workloads = _items(run(["get", "workloads.kueue.x-k8s.io", "-A"]))
     pod_groups = _items(run(["get", "podgroups.scheduling.volcano.sh", "-A"]))
     pods = _items(run(["get", "pods", "-A"]))
+    gang_pods = [
+        {
+            "name": item["metadata"]["name"],
+            "phase": item.get("status", {}).get("phase", "Unknown"),
+            "node": item.get("spec", {}).get("nodeName", "—"),
+        }
+        for item in pods
+        if item["metadata"].get("namespace") == "volcano-lab"
+        and item["metadata"]["name"].startswith(("successful-gang", "blocked-gang"))
+    ]
+    observed_gangs = []
+    for item in pod_groups:
+        namespace = item["metadata"].get("namespace", "default")
+        name = item["metadata"]["name"]
+        if namespace != "volcano-lab" or name not in {"successful-gang", "blocked-gang"}:
+            continue
+        members = [pod for pod in gang_pods if pod["name"].startswith(name)]
+        minimum = item.get("spec", {}).get("minMember", 0)
+        running = sum(pod["phase"] == "Running" for pod in members)
+        observed_gangs.append(
+            {
+                "namespace": namespace,
+                "name": name,
+                "controller_phase": item.get("status", {}).get("phase", "Unknown"),
+                "min_member": minimum,
+                "observed_members": len(members),
+                "observed_running": running,
+                "outcome": "SATISFIED" if running >= minimum else "PENDING",
+            }
+        )
 
     return {
         "generated_at": datetime.now(UTC).isoformat(),
@@ -95,28 +125,8 @@ def collect_snapshot(run: KubectlRunner = kubectl_json) -> dict[str, Any]:
             }
             for item in workloads
         ],
-        "pod_groups": [
-            {
-                "namespace": item["metadata"].get("namespace", "default"),
-                "name": item["metadata"]["name"],
-                "phase": item.get("status", {}).get("phase", "Unknown"),
-                "min_member": item.get("spec", {}).get("minMember", 0),
-                "running": item.get("status", {}).get("running", 0),
-            }
-            for item in pod_groups
-            if item["metadata"].get("namespace") == "volcano-lab"
-            and item["metadata"]["name"] in {"successful-gang", "blocked-gang"}
-        ],
-        "gang_pods": [
-            {
-                "name": item["metadata"]["name"],
-                "phase": item.get("status", {}).get("phase", "Unknown"),
-                "node": item.get("spec", {}).get("nodeName", "—"),
-            }
-            for item in pods
-            if item["metadata"].get("namespace") == "volcano-lab"
-            and item["metadata"]["name"].startswith(("successful-gang", "blocked-gang"))
-        ],
+        "pod_groups": observed_gangs,
+        "gang_pods": gang_pods,
     }
 
 
@@ -175,8 +185,21 @@ def render_dashboard(snapshot: dict[str, Any] | None, error: str | None = None) 
                 + "</section>",
                 "<section><h2>Volcano gang scheduling</h2>"
                 + _table(
-                    ["PodGroup", "Phase", "Minimum members", "Running"],
-                    [[g["name"], g["phase"], g["min_member"], g["running"]] for g in snapshot["pod_groups"]],
+                    [
+                        "PodGroup",
+                        "Outcome (derived from Pods)",
+                        "Running / minimum",
+                        "Controller phase",
+                    ],
+                    [
+                        [
+                            g["name"],
+                            g["outcome"],
+                            f"{g['observed_running']} / {g['min_member']}",
+                            g["controller_phase"],
+                        ]
+                        for g in snapshot["pod_groups"]
+                    ],
                 )
                 + "</section>",
                 "<section><h2>Gang member pods</h2>"
