@@ -10,6 +10,7 @@
 | Priority reclaim / preemption | ✅ EXECUTED LOCALLY | `make demo-preemption` Kueue `Preempted` condition |
 | Starvation avoidance | ✅ EXECUTED LOCALLY | `make demo-starvation` BestEffortFIFO state |
 | Volcano v1.12.0 PodGroup gang scheduling | ✅ EXECUTED LOCALLY | `make demo-gang` |
+| Live scheduler dashboard | ✅ EXECUTED LOCALLY | Read-only local page refreshed from project kind/Kueue/Volcano API state during the 2026-09-26 dashboard validation |
 | CI kind integration | ✅ EXECUTED LOCALLY | GitHub Actions runs `36223123276` and `36228218616` |
 | GPU resource capacity | 🔵 SIMULATED | Kueue-only `example.com/simulated-gpu` quota; no node GPU |
 | Topology / fragmentation scheduler placement | 📐 ARCHITECTURE / CONTRACT ONLY | offline simulator only; not claimed as scheduler evidence |

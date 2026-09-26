@@ -44,6 +44,7 @@ make demo-fair-share
 make demo-preemption
 make demo-starvation
 make demo-gang
+make dashboard
 make verify
 make clean-local
 ```
@@ -59,6 +60,8 @@ make clean-local
 | `make demo-preemption` | Low-priority borrower receives a Kueue `Preempted` condition; protected work admits |
 | `make demo-starvation` | Impossible early workload remains pending; later fitting workload admits |
 | `make demo-gang` | Real Volcano scheduler starts both feasible gang members and retains infeasible members pending |
+| `make dashboard` | Starts a read-only live dashboard at `http://127.0.0.1:18081` from real Kubernetes API state |
+| `make dashboard-stop` | Stops only the project dashboard process |
 | `make cleanroom-validate` | Two project-scoped clean bootstrap/demo/cleanup cycles |
 
 ## Architecture choices
@@ -69,3 +72,12 @@ make clean-local
 - **Synthetic accelerator resource** is intentionally not attached to a node; it proves control-plane admission policy, not physical placement.
 
 See [Kueue versus Volcano](docs/kueue-vs-volcano.md) and [roadmap](docs/roadmap.md).
+
+## Live scheduler dashboard
+
+After `make bootstrap-local`, run `make dashboard` and open
+[`http://127.0.0.1:18081`](http://127.0.0.1:18081). The page refreshes from the
+project-scoped kind cluster every five seconds and shows real Kueue queues and
+workloads plus Volcano PodGroups and gang-member Pod phases. Run `make demo-kueue`
+or `make demo-gang` before taking a screenshot. It is intentionally read-only;
+the prominent simulated-hardware boundary remains visible in the UI.

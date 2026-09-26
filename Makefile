@@ -2,7 +2,7 @@ PYTHON ?= .venv/bin/python
 export PYTHONPATH := scheduler-lab/src
 SHELL := /usr/bin/env bash
 
-.PHONY: install bootstrap-local smoke demo-kueue demo-gang demo-quota demo-borrow demo-fair-share demo-priority demo-preemption demo-starvation demo-topology demo-fragmentation demo-simulator test lint verify clean-local cleanroom-validate status
+.PHONY: install bootstrap-local smoke dashboard dashboard-stop dashboard-status demo-kueue demo-gang demo-quota demo-borrow demo-fair-share demo-priority demo-preemption demo-starvation demo-topology demo-fragmentation demo-simulator test lint verify clean-local cleanroom-validate status
 
 install:
 	./scripts/install.sh
@@ -12,6 +12,15 @@ bootstrap-local:
 
 smoke:
 	./scripts/smoke.sh
+
+dashboard:
+	./scripts/dashboard.sh start
+
+dashboard-stop:
+	./scripts/dashboard.sh stop
+
+dashboard-status:
+	./scripts/dashboard.sh status
 
 demo-kueue:
 	./scripts/demo-kueue.sh

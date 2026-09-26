@@ -50,6 +50,30 @@ docker ps --format '{{.Names}}'  # no gpu-scheduler-lab-* containers
 
 The bootstrap preloads the pinned controller images into only the project kind nodes. This avoids a Docker Desktop multi-platform image-import issue while preserving normal first-run `docker pull` behaviour. It does not depend on a pre-existing cluster, database, Kubernetes CRD, or manually created queue.
 
+## Live dashboard validation
+
+Date: 2026-09-26
+
+After a fresh `make bootstrap-local`, the following was executed against the
+project-scoped cluster:
+
+```bash
+make demo-kueue
+make demo-fair-share
+make demo-gang
+make dashboard
+curl -fsS http://127.0.0.1:18081/
+```
+
+The dashboard served `GPU Scheduler Lab`, the visible `SIMULATED HARDWARE`
+boundary, Kueue queue/workload state, and the Volcano `successful-gang` and
+`blocked-gang` evidence. At the observation point, both successful gang Pods
+were `Running` on the kind worker and both infeasible gang Pods remained
+`Pending`. This UI reads Kubernetes API state every five seconds; it does not
+calculate or display physical GPU telemetry. Its command is now part of the
+next clean-room validation script, but that full repeat has not yet been
+recorded for this dashboard addition.
+
 ## CI validation
 
 GitHub Actions runs [`36223123276`](https://github.com/Bepoadewale/gpu-scheduler-lab/actions/runs/36223123276) and [`36228218616`](https://github.com/Bepoadewale/gpu-scheduler-lab/actions/runs/36228218616) passed on 2026-09-26. The latter verifies the Kueue-webhook readiness retry used before applying Volcano.

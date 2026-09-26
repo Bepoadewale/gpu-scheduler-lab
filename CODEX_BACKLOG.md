@@ -8,6 +8,8 @@ None. The local-first portfolio completion gate is satisfied.
 
 # P0 — Required for Portfolio Claim
 
+- [ ] Include the live scheduler dashboard in the next clean-room validation after its current direct-cluster validation.
+
 P0 blocks PORTFOLIO COMPLETE — LOCAL-FIRST SCOPE; do not select P1/P2 work first.
 
 None. Select P1 only after preserving the executed local-first evidence boundary.
