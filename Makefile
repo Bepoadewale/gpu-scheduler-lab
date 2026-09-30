@@ -2,7 +2,7 @@ PYTHON ?= .venv/bin/python
 export PYTHONPATH := scheduler-lab/src
 SHELL := /usr/bin/env bash
 
-.PHONY: install bootstrap-local smoke dashboard dashboard-stop dashboard-status demo-kueue demo-gang demo-quota demo-borrow demo-fair-share demo-priority demo-preemption demo-starvation demo-topology demo-fragmentation demo-simulator test lint verify clean-local cleanroom-validate status
+.PHONY: install bootstrap-local smoke dashboard dashboard-stop dashboard-status demo-kueue demo-gang demo-quota demo-borrow demo-fair-share demo-priority demo-preemption demo-starvation demo-topology demo-fragmentation demo-simulator test lint verify clean-local cleanroom-validate status public-demo
 
 install:
 	./scripts/install.sh
@@ -47,6 +47,9 @@ clean-local:
 
 cleanroom-validate:
 	./scripts/cleanroom-validate.sh
+
+public-demo:
+	./scripts/start-public-demo.sh
 
 test:
 	$(PYTHON) -m pytest -q

@@ -84,3 +84,7 @@ the prominent simulated-hardware boundary remains visible in the UI. Gang
 success is derived from the actual member Pods (`Running / minimum`), while the
 native Volcano PodGroup phase is shown separately for transparent controller
 state.
+
+### Temporary public scheduler dashboard
+
+`make public-demo` bootstraps the project kind cluster, runs the Kueue and Volcano demonstrations, starts the read-only dashboard, and prints a temporary Cloudflare Quick Tunnel URL. It uses no Cloudflare account, named tunnel, or persistent credential. The URL is public, disposable, changes each run, and must never be committed. The dashboard still reports **simulated hardware**; `Ctrl-C` stops only the tunnel and `make clean-local` removes this lab's resources.
